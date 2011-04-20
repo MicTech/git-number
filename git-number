@@ -7,15 +7,16 @@
 #                     equivalent filename from the previous run of git-number
 
 if [ $# -eq 0 ]; then
-    git-id
-    exit
+    git-id;
+    exit;
 fi
 
-for arg in "$@";do
-    if [[ $arg =~ ^[0-9][0-9]*$ ]]; then
-	arg=`git-list $arg`
-    elif [[ $arg =~ ^[0-9][0-9]*-[0-9][0-9]*$ ]]; then
-	arg=`git-list $arg`
+for arg in $@;
+do
+    if echo $arg | grep -Eq "^[0-9][0-9]*$"; then
+      arg=`git-list $arg`
+    elif echo $arg | grep -Eq "^[0-9][0-9]*-[0-9][0-9]*$"; then
+      arg=`git-list $arg`
     fi
     args="$args $arg"
 done
